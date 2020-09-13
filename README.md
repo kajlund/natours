@@ -10,3 +10,4 @@
   - [x] Handling POST Requests
   - [x] Handling URL params
   - [x] Tours update and delete
+  - [x] Refactor routing and handlers
