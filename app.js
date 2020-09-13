@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 
 const tours = require('./dev-data/data/tours-simple.json');
+const { fail } = require('assert');
 
 const app = express();
 
@@ -14,6 +15,18 @@ app.get('/api/v1/tours', (req, res) => {
     status: 'success',
     results: tours.length,
     data: { tours },
+  });
+});
+
+app.get('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  const tour = tours.find(t => t.id === id);
+  if (!tour)
+    return res.status(404).json({ status: 'fail', error: 'Not found' });
+
+  res.status(200).send({
+    status: 'success',
+    data: { tour },
   });
 });
 

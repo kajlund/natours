@@ -6,5 +6,6 @@
 
 - [ ] Build the Natours API
   - [x] Setup Express
-  - [ ] Handling GET requests
-  - [ ] Handling POST Requests
+  - [x] Handling GET requests
+  - [x] Handling POST Requests
+  - [x] Handling URL params
