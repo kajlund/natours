@@ -4,7 +4,7 @@
 
 ## Tasks
 
-- [x] Build the Natours API
-  - [x] Setup Express and Basic Routing
-  - [x] Handling GET requests
-  - [x] Handling POST Requests
+- [ ] Build the Natours API
+  - [x] Setup Express
+  - [ ] Handling GET requests
+  - [ ] Handling POST Requests
