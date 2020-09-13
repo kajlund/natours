@@ -1,6 +1,18 @@
+const { default: consolaGlobalInstance } = require('consola');
 const fs = require('fs');
 
 const tours = require('../dev-data/data/tours-simple.json');
+
+exports.checkId = (req, res, next, val) => {
+  consola.info(`Id param => ${val}`);
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id',
+    });
+  }
+  next();
+};
 
 exports.getAllTours = (req, res) => {
   res.status(200).send({
