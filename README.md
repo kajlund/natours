@@ -11,3 +11,6 @@
   - [x] Handling URL params
   - [x] Tours update and delete
   - [x] Refactor routing and handlers
+  - [x] Middleware and Morgan
+  - [x] Users resource skeleton
+  - [ ] Refactor to separate files
