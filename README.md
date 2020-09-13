@@ -13,4 +13,4 @@
   - [x] Refactor routing and handlers
   - [x] Middleware and Morgan
   - [x] Users resource skeleton
-  - [ ] Refactor to separate files
+  - [x] Refactor to separate files

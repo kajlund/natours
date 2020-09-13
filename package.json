@@ -2,9 +2,10 @@
   "name": "natours",
   "version": "1.0.0",
   "description": "Learning node, express and MongoDB",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "server": "nodemon app"
+    "server": "nodemon server",
+    "start": "node server"
   },
   "keywords": [],
   "author": "LuKa, <kaj.lund@gmail.com>",
