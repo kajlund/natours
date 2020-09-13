@@ -1,6 +1,8 @@
 const fs = require('fs');
 
+const consola = require('consola');
 const express = require('express');
+const morgan = require('morgan');
 
 const tours = require('./dev-data/data/tours-simple.json');
 const { fail } = require('assert');
@@ -8,9 +10,15 @@ const { fail } = require('assert');
 const app = express();
 
 // Middleware
+app.use(morgan('dev'));
 app.use(express.json());
 
-// Controller functions
+app.use((req, res, next) => {
+  consola.info('Middleware says hi! 👋');
+  next();
+});
+
+// Route Handlers
 const getAllTours = (req, res) => {
   res.status(200).send({
     status: 'success',
@@ -83,8 +91,8 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
+// Start Server
 const PORT = 3000;
-
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
+  consola.info(`App running on port ${PORT}`);
 });
