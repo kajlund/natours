@@ -4,7 +4,7 @@
 
 ## Tasks
 
-- [ ] Build the Natours API
+- [x] Build the Natours API
   - [x] Setup Express
   - [x] Handling GET requests
   - [x] Handling POST Requests
@@ -14,3 +14,10 @@
   - [x] Middleware and Morgan
   - [x] Users resource skeleton
   - [x] Refactor to separate files
+  - [x] Add verification middleware samples
+  - [x] Serve static files from public folder
+  - [x] Handle environment variables
+  - [x] Add linting and formatting
+  - [x] Add Mongoose
+- [ ] Create API functionality
+  - [ ] Tour Model CRUD
