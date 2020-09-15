@@ -20,4 +20,5 @@
   - [x] Add linting and formatting
   - [x] Add Mongoose
 - [ ] Create API functionality
-  - [ ] Tour Model CRUD
+  - [x] Implement Tour Model CRUD
+  - [ ] Implement Tour data seeding

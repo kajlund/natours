@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Learning node, express and MongoDB",
   "main": "server.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "server": "nodemon server",
     "start": "node server"

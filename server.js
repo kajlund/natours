@@ -20,7 +20,7 @@ const start = async () => {
       consola.info(`App running on port ${PORT}`);
     });
   } catch (err) {
-    consola.log(err.message);
+    consola.error(err);
     process.exit(1);
   }
 };
