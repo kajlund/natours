@@ -21,4 +21,5 @@
   - [x] Add Mongoose
 - [ ] Create API functionality
   - [x] Implement Tour Model CRUD
-  - [ ] Implement Tour data seeding
+  - [x] Implement Tour data seeding
+  - [ ] Sorting, Filtering and Paging

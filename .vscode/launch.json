@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\server.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Destroy Data",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\dev-data\\data\\import-dev-data.js",
+      "runtimeArgs": ["--delete"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Seed Data",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\dev-data\\data\\import-dev-data.js",
+      "runtimeArgs": ["--import"]
+    }
+  ]
+}
