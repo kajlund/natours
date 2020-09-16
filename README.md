@@ -22,4 +22,4 @@
 - [ ] Create API functionality
   - [x] Implement Tour Model CRUD
   - [x] Implement Tour data seeding
-  - [ ] Sorting, Filtering and Paging
+  - [x] Sorting, Filtering and Paging
