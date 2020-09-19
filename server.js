@@ -4,6 +4,7 @@ const consola = require('consola');
 const mongoose = require('mongoose');
 
 const app = require('./app');
+let server;
 
 const start = async () => {
   try {
@@ -16,7 +17,7 @@ const start = async () => {
     consola.info('MongoDB is connected');
 
     const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
+    server = app.listen(PORT, () => {
       consola.info(`App running on port ${PORT}`);
     });
   } catch (err) {
@@ -24,5 +25,26 @@ const start = async () => {
     process.exit(1);
   }
 };
+
+// Async catch-all error handler
+process.on('unhandledRejection', (err) => {
+  consola.error('UNHANDLED REJECTION');
+  consola.error(err.name, err.message);
+  if (server) {
+    consola.error('Shutting down server and exiting');
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
+});
+
+// Sync catch-all error handler
+process.on('uncaughtException', (err) => {
+  consola.error('UNCAUGHT EXCEPTION');
+  consola.error(err.name, err.message);
+  process.exit(1);
+});
 
 start();
