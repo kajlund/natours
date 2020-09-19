@@ -1,5 +1,7 @@
+const consola = require('consola');
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const validator = require('validator');
 
 const tourSchema = mongoose.Schema(
   {
@@ -8,6 +10,9 @@ const tourSchema = mongoose.Schema(
       required: [true, 'A tour must have a name'],
       unique: true,
       trim: true,
+      maxlength: [40, 'A tour name must be max 40 chars long'],
+      minlength: [10, 'A tour name must be 10 chars or more'],
+      // validate: [validator.isAlpha, 'Tour name must only contain characters'],
     },
     slug: String,
     duration: {
@@ -21,17 +26,35 @@ const tourSchema = mongoose.Schema(
     difficulty: {
       type: String,
       required: [true, 'A tour must have a difficulty'],
+      enum: {
+        values: ['easy', 'medium', 'difficult'],
+        message: 'Difficulty must be easy, medium or difficult',
+      },
     },
     ratingsAverage: {
       type: Number,
       default: 4.5,
+      min: [1, 'Rating must be 1 or higher'],
+      max: [5, 'Rating must be 5 or lower'],
     },
     ratingsQuantity: {
       type: Number,
       default: 0,
     },
-    price: { type: Number, required: [true, 'A tour must have a price'] },
-    priceDiscount: { type: Number },
+    price: {
+      type: Number,
+      required: [true, 'A tour must have a price'],
+    },
+    priceDiscount: {
+      type: Number,
+      validate: {
+        validator: function (val) {
+          // In validators this only point to doc on new objs
+          return val < this.price;
+        },
+        message: 'The discount price ({VALUE}) must be less than price',
+      },
+    },
     summary: {
       type: String,
       trim: true,
@@ -44,6 +67,10 @@ const tourSchema = mongoose.Schema(
     },
     images: [String],
     startDates: [Date],
+    secretTour: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
@@ -65,5 +92,25 @@ tourSchema.pre('save', function (next) {
 // tourSchema.post('save', function(doc, next) {
 //   next();
 // });
+
+// QUERY MIDDLEWARE - Use rexex to also trigger on findOne...
+tourSchema.pre(/^find/, function (next) {
+  this.find({ secretTour: { $ne: true } });
+  this.start = Date.now();
+  next();
+});
+
+tourSchema.post(/^find/, function (docs, next) {
+  consola.info(`Query took ${Date.now() - this.start} milliseconds`);
+  this.find({ secretTour: { $ne: true } });
+  next();
+});
+
+// AGGREGATION MIDDLEWARE
+tourSchema.pre('aggregate', function (next) {
+  // this points to aggregation
+  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+  next();
+});
 
 module.exports = mongoose.model('Tour', tourSchema);
