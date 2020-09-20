@@ -1,4 +1,5 @@
 const consola = require('consola');
+const deepcopy = require('deepcopy');
 const mongoose = require('mongoose');
 
 const AppError = require('../utils/appError');
@@ -57,7 +58,7 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else {
-    let error = JSON.parse(JSON.stringify(err));
+    let error = deepcopy(err);
     if (err instanceof mongoose.Error.CastError)
       error = handleCastErrorDB(error);
     if (err.code === 11000) error = handleDuplicateFieldsDB(error);
