@@ -9,9 +9,11 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  const msg = `Duplicate field value '${err.keyValue.name}' for unique field '${
-    Object.keys(err.keyValue)[0]
-  }'`;
+  let msg = '';
+
+  for (const [key, value] of Object.entries(err.keyValue)) {
+    msg += `Duplicate field value '${value}' for unique field '${key}'. `;
+  }
   return new AppError(msg, 400);
 };
 
