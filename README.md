@@ -23,3 +23,13 @@
   - [x] Implement Tour Model CRUD
   - [x] Implement Tour data seeding
   - [x] Sorting, Filtering and Paging
+  - [x] Add aggregate endpoints
+  - [x] Add durationWeeks virtual property
+  - [x] Add slug middleware
+  - [x] Add Tour model validation
+  - [x] Add 404 and proper error handling
+  - [x] Add User model, signup and login
+  - [ ] Add Tour routes protection
+  - [ ] Add user roles and permissions
+  - [ ] Password reset functionality
+  - [ ] User CRUD

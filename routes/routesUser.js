@@ -10,6 +10,11 @@ const {
   deleteUser,
 } = require('../controllers/ctrlUser');
 
+const { signup, login } = require('../controllers/ctrlAuth');
+
+router.post('/signup', signup);
+router.post('/login', login);
+
 router.route('/').get(getAllUsers).post(createUser);
 router.route('/:id').get(getUserById).patch(updateUser).delete(deleteUser);
 
