@@ -1,4 +1,5 @@
-const bcrypt = require('bcryptjs');
+const { promisify } = require('util');
+
 const jwt = require('jsonwebtoken');
 
 const catchAsync = require('../utils/catchAsync');
@@ -11,6 +12,37 @@ const signToken = (id) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
+
+const jwtVerify = promisify(jwt.verify);
+
+exports.protect = catchAsync(async (req, res, next) => {
+  const auth = req.headers.authorization;
+  let token = '';
+  if (auth && auth.startsWith('Bearer')) {
+    token = auth.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(new AppError('Log in to get access', 401));
+  }
+
+  // Verify token
+  const decoded = await jwtVerify(token, process.env.JWT_SECRET);
+
+  // Verify that user still exists
+  const loginUser = await User.findById(decoded.id);
+  if (!loginUser) {
+    return next(
+      new AppError('The user this token belonged to does no longer exist', 401)
+    );
+  }
+  if (loginUser.changedPasswordAfter(decoded.iat)) {
+    return next(new AppError('Password changed. The token has expired', 401));
+  }
+  // Grant access to protected route
+  req.user = loginUser;
+  next();
+});
 
 exports.signup = catchAsync(async (req, res, next) => {
   const user = await User.create({

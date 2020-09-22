@@ -29,7 +29,7 @@
   - [x] Add Tour model validation
   - [x] Add 404 and proper error handling
   - [x] Add User model, signup and login
-  - [ ] Add Tour routes protection
+  - [x] Auth middleware and Tour route protection
   - [ ] Add user roles and permissions
   - [ ] Password reset functionality
   - [ ] User CRUD
