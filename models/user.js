@@ -35,6 +35,11 @@ const userSchema = mongoose.Schema(
     },
     avatar: String,
     passwordChangedAt: Date,
+    role: {
+      type: String,
+      enum: ['user', 'guide', 'lead-guide', 'admin'],
+      default: 'user',
+    },
   },
   { timestamps: true }
 );

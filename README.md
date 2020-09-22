@@ -30,6 +30,6 @@
   - [x] Add 404 and proper error handling
   - [x] Add User model, signup and login
   - [x] Auth middleware and Tour route protection
-  - [ ] Add user roles and permissions
+  - [x] Add user role plus middleware
   - [ ] Password reset functionality
   - [ ] User CRUD
