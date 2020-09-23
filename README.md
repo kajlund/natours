@@ -33,7 +33,7 @@
   - [x] Add user role plus middleware
   - [x] Password reset functionality
   - [x] User to change own data routes
-  - [ ] Cookie support
+  - [x] Cookie support
   - [ ] Rate limiting
   - [ ] Security Headers
   - [ ] Data Sanitization
