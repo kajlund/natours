@@ -32,7 +32,7 @@
   - [x] Auth middleware and Tour route protection
   - [x] Add user role plus middleware
   - [x] Password reset functionality
-  - [ ] User CRUD
+  - [x] User to change own data routes
   - [ ] Cookie support
   - [ ] Rate limiting
   - [ ] Security Headers
