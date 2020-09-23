@@ -1,4 +1,7 @@
+const crypto = require('crypto');
+
 const bcrypt = require('bcryptjs');
+const consola = require('consola');
 const gravatar = require('gravatar');
 const mongoose = require('mongoose');
 const validator = require('validator');
@@ -40,6 +43,8 @@ const userSchema = mongoose.Schema(
       enum: ['user', 'guide', 'lead-guide', 'admin'],
       default: 'user',
     },
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
   { timestamps: true }
 );
@@ -51,11 +56,19 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// Hash password before saving to DB
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
-  this.passwordChangedAt = new Date();
+  next();
+});
+
+// Update passwordChangedAt only when changed on existing docs
+// This is critical for disabling JWTs with a password change
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  this.passwordChangedAt = new Date() - 1000; // Subract a sec so that a newly created JWT doesn't fail
   next();
 });
 
@@ -72,6 +85,18 @@ userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     return JWTTimeStamp < changedTimeStamp;
   }
   return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const token = crypto.randomBytes(32).toString('hex');
+  consola.info({ token });
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+  consola.info(this.passwordResetToken);
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 mins
+  return token;
 };
 
 module.exports = mongoose.model('User', userSchema);

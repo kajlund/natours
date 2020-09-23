@@ -31,5 +31,10 @@
   - [x] Add User model, signup and login
   - [x] Auth middleware and Tour route protection
   - [x] Add user role plus middleware
-  - [ ] Password reset functionality
+  - [x] Password reset functionality
   - [ ] User CRUD
+  - [ ] Cookie support
+  - [ ] Rate limiting
+  - [ ] Security Headers
+  - [ ] Data Sanitization
+  - [ ] Prevent param pollution
