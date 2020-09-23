@@ -19,7 +19,7 @@
   - [x] Handle environment variables
   - [x] Add linting and formatting
   - [x] Add Mongoose
-- [ ] Create API functionality
+- [ ] Create API functionality 1
   - [x] Implement Tour Model CRUD
   - [x] Implement Tour data seeding
   - [x] Sorting, Filtering and Paging
@@ -36,5 +36,6 @@
   - [x] Cookie support
   - [x] Rate limiting
   - [x] Security Headers
-  - [ ] Data Sanitization and cross-site scripting
-  - [ ] Prevent param pollution
+  - [x] Data Sanitization and cross-site scripting
+  - [x] Prevent param pollution
+- [ ] Create API functionality 2
