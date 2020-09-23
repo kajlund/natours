@@ -34,7 +34,7 @@
   - [x] Password reset functionality
   - [x] User to change own data routes
   - [x] Cookie support
-  - [ ] Rate limiting
-  - [ ] Security Headers
-  - [ ] Data Sanitization
+  - [x] Rate limiting
+  - [x] Security Headers
+  - [ ] Data Sanitization and cross-site scripting
   - [ ] Prevent param pollution
